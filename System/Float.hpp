@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Char.hpp"
+#include "Converters.hpp"
 #include "fast_float.h"
 
 #if defined(_WIN64) || defined(_WIN32)
@@ -25,13 +26,54 @@ namespace System
 	class Float
 	{
 		public:
+			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::u16string& text)
+			{
+				Float64 result;
+
+				const std::string strText = Converters::ConvertToString(text);
+				const Char8* first = strText.data();
+				const Char8* last = strText.data() + text.size();
+
+				// ReSharper disable once CppTooWideScopeInitStatement
+				const auto [discarded, ec] = fast_float::from_chars(first, last, result);
+
+				// The parsing failed
+				if (ec != std::errc())
+				{
+					return {};
+				}
+
+				return result;
+			}
+
+			[[nodiscard]] static std::optional<Float32> TryParseF32(const std::u16string& text)
+			{
+				Float32 result;
+
+				const std::string strText = Converters::ConvertToString(text);
+				const Char8* first = strText.data();
+				const Char8* last = strText.data() + text.size();
+
+				// ReSharper disable once CppTooWideScopeInitStatement
+				const auto [discarded, errorCode] = fast_float::from_chars(first, last, result);
+
+				// The parsing failed
+				if (errorCode != std::errc())
+				{
+					return {};
+				}
+
+				return result;
+			}
+
 			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::string& text)
 			{
 				Float64 result;
-				// ReSharper disable once CppTooWideScopeInitStatement
+
 				const Char8* first = text.data();
 				const Char8* last = text.data() + text.size();
 
+				// ReSharper disable once CppTooWideScopeInitStatement
 				const auto [discarded, ec] = fast_float::from_chars(first, last, result);
 
 				// The parsing failed
@@ -46,9 +88,11 @@ namespace System
 			[[nodiscard]] static std::optional<Float32> TryParseF32(const std::string& text)
 			{
 				Float32 result;
-				// ReSharper disable once CppTooWideScopeInitStatement
+
 				const Char8* first = text.data();
 				const Char8* last = text.data() + text.size();
+
+				// ReSharper disable once CppTooWideScopeInitStatement
 				const auto [discarded, errorCode] = fast_float::from_chars(first, last, result);
 				
 				// The parsing failed

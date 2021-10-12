@@ -44,5 +44,16 @@ namespace System::Converters
 
 		return buffer;
 	}
+
+	[[nodiscard]] static std::string ConvertToString(const std::u16string& text)
+	{
+		std::string buffer;
+		for (const Char16 chr : text)
+		{
+			buffer += static_cast<Char8>(chr);
+		}
+
+		return buffer;
+	}
 }
 #endif
