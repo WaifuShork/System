@@ -44,5 +44,11 @@
     <ClInclude Include="UnicodeCategory.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Format.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vsharp.txt" />
   </ItemGroup>
 </Project>

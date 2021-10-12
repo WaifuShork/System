@@ -1,0 +1,97 @@
+// import specific items from MyModule
+use [MyType, MyMethod] from MyModule;
+
+// or get everything
+use MyModule;
+
+[public] module MyProgram
+{
+    [public, immutable, data] class DummyData(string Data, int32 MoreData);
+
+    [public] class Robot
+    {
+        // note the fact that we have a public auto property that can be get/set
+        [public, property] string Name { [get][set] }
+    }
+
+    [public] class DogBot : [immutable] Robot
+    {
+        [public, ctor] FromString(string name)
+        {
+            // we have access to Name but...
+            Name = "Fido"; // this will not compile because everything in Robot 
+            // that DogBot has access to by nature of inheritence is "frozen" or immutablely locked
+        }
+    }
+
+    [public, static] class PersonData
+    {
+        // we may just want a static class with only static methods 
+        // to provide purely helpers, extension methods may also live here 
+        [public, static, extending<Person>] GetName() -> [notnull<string>]
+        {
+            return this.Name;
+        }
+    } 
+
+    [public] class Person 
+    {
+        [private, field] string _name;
+
+        // manual property
+        [public, property] string Name 
+        {
+            [get] this
+            {
+                return _name;
+            },
+            [set] this 
+            {
+                _name = value;
+            } 
+        }
+
+        // also auto properties
+        // a lack of {} specifies it'll be auto property
+        [public, property] string PersonsName { [get][set] }
+
+        // you may also control the property getting and setting...
+        [public, property] string AnotherName { [get][private, set] }
+
+        // static ctor
+        [public, static] this()
+        {
+            // standard static constructor that is called at comp-time for pre-initializations
+        }
+
+        [public] this()
+        {
+            // called as at object allocation, can also take normal params too
+        }
+
+        // something that could be used less is IMMUTABLE ctors, yep you heard that correctly.
+        [public, immutable] this()
+        {
+            // but why? you ask. what happens if you don't want to actually modify any instance data
+            // and just call a function to start a process or something, this explicitly tells the reader
+            // and the compiler, that nothing inside this ctor is ever changed.
+        }
+
+        // mutable allows modification of "this"
+        // [public, immutable] would notify the compiler that nothing instance related can be modified, all data received is a copy just like C++ const functions
+        [public, mutable] ModifyAndReturn() -> int32
+        {
+            someField = 42;
+            return 69;
+        }
+
+        [public, immutable] ReturnValue() -> float32
+        {
+            // if you attempted to do something like
+            // someField = 69; 
+            // it would throw a compilation error because this instance guarantees immutability
+
+            return 420;
+        }
+    }
+}

@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <optional>
 #include <string>
-
+#include "fast_float.h"
 #include "Char.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
@@ -51,7 +51,7 @@ namespace System
 	class Integer
 	{
 		public:
-			static std::optional<Int64> TryParseI64(const std::u16string& value)
+			[[nodiscard]] static std::optional<Int64> TryParseI64(const std::u16string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -83,7 +83,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			static std::optional<UInt64> TryParseUI64(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt64> TryParseUI64(const std::u16string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -111,7 +111,7 @@ namespace System
 				return result;
 			}
 
-			static std::optional<Int32> TryParseI32(const std::u16string& value)
+			[[nodiscard]] static std::optional<Int32> TryParseI32(const std::u16string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -143,7 +143,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			static std::optional<UInt32> TryParseUI32(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt32> TryParseUI32(const std::u16string& value)
 			{
 				if (value.length() == 0)
 				{
