@@ -98,12 +98,14 @@ namespace System
 				return buffer;
 			}
 
-			static void WriteLine(const std::string& input = "")
+			template<typename TValue = std::string>
+			static void WriteLine(const TValue& input = "")
 			{
 				std::cout << input << '\n';
 			}
 
-			static void WriteLineW(const std::wstring& input = L"")
+			template<typename TValue = std::wstring>
+			static void WriteLineW(const TValue& input = L"")
 			{
 				std::wcout << input << '\n';
 			}

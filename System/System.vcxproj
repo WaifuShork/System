@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClInclude Include="Console.hpp" />
     <ClInclude Include="ConsoleColor.hpp" />
-    <ClInclude Include="Int64.hpp" />
+    <ClInclude Include="Integer.hpp" />
     <ClInclude Include="Converters.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

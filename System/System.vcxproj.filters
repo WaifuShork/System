@@ -23,7 +23,7 @@
     <ClInclude Include="Console.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Int64.hpp">
+    <ClInclude Include="Integer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Converters.hpp">
