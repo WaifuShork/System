@@ -4,6 +4,7 @@
 #include "Console.hpp"
 #include <Windows.h>
 
+#if defined(_WIN64) || defined(_WIN32)
 namespace System
 {
 	enum class ConsoleColor
@@ -90,3 +91,4 @@ namespace System
 		SetConsoleTextAttribute(handle, static_cast<int>(bgColor) << 4 | static_cast<int>(fgColor));
     }
 }
+#endif

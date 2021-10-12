@@ -3,6 +3,9 @@
 #include <optional>
 #include <string>
 
+#include "Char.hpp"
+
+#if defined(_WIN64) || defined(_WIN32)
 namespace System
 {
 	// -128 to 127
@@ -45,14 +48,10 @@ namespace System
 	constexpr UInt64 UInt64Max = 0xffffffffffffffffi64;
 	constexpr UInt64 UInt64Min = 0x0ui64;
 
-	using Char16 = char16_t;
-	using Char32 = char32_t;
-	using WChar = wchar_t;
-
 	class Integer
 	{
 		public:
-			static std::optional<Int64> TryParseI64(const std::wstring& value)
+			static std::optional<Int64> TryParseI64(const std::string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -84,7 +83,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			static std::optional<UInt64> TryParseUI64(const std::wstring& value)
+			static std::optional<UInt64> TryParseUI64(const std::string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -112,7 +111,7 @@ namespace System
 				return result;
 			}
 
-			static std::optional<Int32> TryParseI32(const std::wstring& value)
+			static std::optional<Int32> TryParseI32(const std::string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -144,7 +143,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			static std::optional<UInt32> TryParseUI32(const std::wstring& value)
+			static std::optional<UInt32> TryParseUI32(const std::string& value)
 			{
 				if (value.length() == 0)
 				{
@@ -172,24 +171,25 @@ namespace System
 				return result;
 			}
 
-			[[nodiscard]] static std::optional<Int16> TryParseI16(const std::wstring& value)
+			[[nodiscard]] static std::optional<Int16> TryParseI16(const std::string& value)
 			{
 				return TryParseI32(value);
 			}
 
-			[[nodiscard]] static std::optional<UInt16> TryParseUI16(const std::wstring& value)
+			[[nodiscard]] static std::optional<UInt16> TryParseUI16(const std::string& value)
 			{
 				return TryParseUI32(value);
 			}
 
-			[[nodiscard]] static std::optional<Int8> TryParseI8(const std::wstring& value)
+			[[nodiscard]] static std::optional<Int8> TryParseI8(const std::string& value)
 			{
 				return TryParseI32(value);
 			}
 
-			[[nodiscard]] static std::optional<UInt8> TryParseUI8(const std::wstring& value)
+			[[nodiscard]] static std::optional<UInt8> TryParseUI8(const std::string& value)
 			{
 				return TryParseUI32(value);
 			}
 	};
 }
+#endif 

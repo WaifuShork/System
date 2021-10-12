@@ -1,23 +1,48 @@
 #pragma once
+#include <algorithm>
+#include <codecvt>
 #include <string>
+#include "Char.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System::Converters
 {
-	[[nodiscard]] static const char* ConvertSToCCPtr(const std::string& text)
+	[[nodiscard]] static const Char8* ConvertToCharPtr(const std::string& text)
 	{
-		char* chrBuffer = new char[text.size() + 1];
+		Char8* chrBuffer = new Char8[text.size() + 1];
 		std::copy(text.begin(), text.end(), chrBuffer);
 		chrBuffer[text.size()] = '\0';
 		return chrBuffer;
 	}
 
-	[[nodiscard]] static const wchar_t* ConvertWSToCCPtr(const std::wstring& text)
+	[[nodiscard]] static const WChar* ConvertToCharPtr(const std::wstring& text)
 	{
-		wchar_t* chrBuffer = new wchar_t[text.size() + 1];
+		WChar* chrBuffer = new WChar[text.size() + 1];
 		std::copy(text.begin(), text.end(), chrBuffer);
 		chrBuffer[text.size()] = '\0';
 		return chrBuffer;
+	}
+
+	[[nodiscard]] static std::string ConvertToString(const std::wstring& text)
+	{
+		std::string buffer;
+		std::transform(text.begin(), text.end(), std::back_inserter(buffer), [](const WChar chr)
+		{
+			return static_cast<Char8>(chr);
+		});
+
+		return buffer;
+	}
+
+	[[nodiscard]] static std::wstring ConvertToWString(const std::string& text)
+	{
+		std::wstring buffer; 
+		for (const Char8 chr : text)
+		{
+			buffer += chr;
+		}
+
+		return buffer;
 	}
 }
 #endif
