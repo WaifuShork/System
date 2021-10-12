@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Char.hpp"
-#include "Converters.hpp"
+#include "Converter.hpp"
 #include "fast_float.h"
 
 #if defined(_WIN64) || defined(_WIN32)
@@ -29,10 +29,10 @@ namespace System
 			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::u16string& text)
 			{
 				Float64 result;
-
-				const std::string strText = Converters::ConvertToString(text);
-				const Char8* first = strText.data();
-				const Char8* last = strText.data() + text.size();
+				
+				const std::string strBuffer = Converter::FromUTF16(text);
+				const Char8* first = strBuffer.data();
+				const Char8* last = strBuffer.data() + strBuffer.size();
 
 				// ReSharper disable once CppTooWideScopeInitStatement
 				const auto [discarded, ec] = fast_float::from_chars(first, last, result);
@@ -50,51 +50,13 @@ namespace System
 			{
 				Float32 result;
 
-				const std::string strText = Converters::ConvertToString(text);
-				const Char8* first = strText.data();
-				const Char8* last = strText.data() + text.size();
+				const std::string strBuffer = Converter::FromUTF16(text);
+				const Char8* first = strBuffer.data();
+				const Char8* last = strBuffer.data() + strBuffer.size();
 
 				// ReSharper disable once CppTooWideScopeInitStatement
 				const auto [discarded, errorCode] = fast_float::from_chars(first, last, result);
 
-				// The parsing failed
-				if (errorCode != std::errc())
-				{
-					return {};
-				}
-
-				return result;
-			}
-
-			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::string& text)
-			{
-				Float64 result;
-
-				const Char8* first = text.data();
-				const Char8* last = text.data() + text.size();
-
-				// ReSharper disable once CppTooWideScopeInitStatement
-				const auto [discarded, ec] = fast_float::from_chars(first, last, result);
-
-				// The parsing failed
-				if (ec != std::errc())
-				{
-					return {};
-				}
-
-				return result;
-			}
-
-			[[nodiscard]] static std::optional<Float32> TryParseF32(const std::string& text)
-			{
-				Float32 result;
-
-				const Char8* first = text.data();
-				const Char8* last = text.data() + text.size();
-
-				// ReSharper disable once CppTooWideScopeInitStatement
-				const auto [discarded, errorCode] = fast_float::from_chars(first, last, result);
-				
 				// The parsing failed
 				if (errorCode != std::errc())
 				{

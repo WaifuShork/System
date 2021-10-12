@@ -1,14 +1,12 @@
 #include "Console.hpp"
 #include "Float.hpp"
+#include "Converter.hpp"
 
 using namespace System;
 int main()
 {
-	std::optional<Float64> result = Float::TryParseF64(u"12.12e+27");
-	if (result.has_value())
-	{
-		Console::WriteLine(result.value());
-	}
+	auto foo = Converter::ToUTF16("12.12e+27");
+	Console::WriteLine(Float::TryParseF32(foo).value());
 
 	return 0;
 }

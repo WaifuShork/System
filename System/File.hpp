@@ -12,13 +12,12 @@ namespace System
 	class File
 	{
 		public:
-			[[nodiscard]] static bool Exists(const std::string& path)
+			[[nodiscard]] static bool Exists(const std::u16string& path)
 			{
 				return std::filesystem::exists(path);
 			}
 
-
-			[[nodiscard]] static std::optional<std::string> ReadAllText(const std::string& path)
+			[[nodiscard]] static std::optional<std::u16string> ReadAllText(const std::u16string& path)
 			{
 				if (!Exists(path))
 				{
@@ -26,7 +25,7 @@ namespace System
 				}
 
 				std::ifstream buffer(path);
-				return std::string(std::istreambuf_iterator<Char8>(buffer), std::istreambuf_iterator<Char8>());
+				return std::u16string(std::istreambuf_iterator<Char8>(buffer), std::istreambuf_iterator<Char8>());
 			}
 	};
 }

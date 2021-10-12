@@ -155,14 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Char.hpp" />
-    <ClInclude Include="CharUnicodeInfo.hpp" />
     <ClInclude Include="Console.hpp" />
     <ClInclude Include="ConsoleColor.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Float.hpp" />
     <ClInclude Include="Integer.hpp" />
-    <ClInclude Include="Converters.hpp" />
-    <ClInclude Include="Math.hpp" />
+    <ClInclude Include="Converter.hpp" />
     <ClInclude Include="UnicodeCategory.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

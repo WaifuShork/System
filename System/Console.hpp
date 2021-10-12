@@ -6,6 +6,7 @@
 #include <conio.h>
 
 #include "ConsoleColor.hpp"
+#include "Converter.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -13,14 +14,9 @@ namespace System
 	class Console
 	{
 		public:
-			static void SetTitleW(const std::wstring& title)
+			static void SetTitle(const std::u16string& title)
 			{
-				SetConsoleTitleW(title.c_str());
-			}
-
-			static void SetTitle(const std::string& title)
-			{
-				SetConsoleTitleA(title.c_str());
+				SetConsoleTitleA(Converter::FromUTF16(title).c_str());
 			}
 
 			static ConsoleColor GetForegroundColor()
@@ -77,37 +73,30 @@ namespace System
 				SetConsoleCursorPosition(hStdOut, homeCoords);
 			}
 
-			static std::string ReadLine()
-			{
-				std::string buffer{};
-				std::getline(std::cin, buffer);
-				return buffer;
-			}
-
-			static std::wstring ReadLineW()
+			static std::u16string ReadLine()
 			{
 				std::wstring buffer{};
 				std::getline(std::wcin, buffer);
-				return buffer;
+				return std::u16string(buffer.begin(), buffer.end());
 			}
 
-			static std::wstring ReadWordW()
+			static std::u16string ReadWord()
 			{
 				std::wstring buffer{};
 				std::wcin >> buffer;
-				return buffer;
+				return std::u16string(buffer.begin(), buffer.end());
+				// return Converter::U16Converter.from_bytes(buffer);
+			}
+			
+			static void WriteLine(const std::u16string& input = u"")
+			{
+				std::cout << Converter::FromUTF16(input) << '\n';
 			}
 
-			template<typename TValue = std::string>
-			static void WriteLine(const TValue& input = "")
+			template<typename T>
+			static void WriteLine(const T& input = "")
 			{
 				std::cout << input << '\n';
-			}
-
-			template<typename TValue = std::wstring>
-			static void WriteLineW(const TValue& input = L"")
-			{
-				std::wcout << input << '\n';
 			}
 	};
 }
