@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdint>
 #include <optional>
-#include <string>
 #include "fast_float.h"
 
 #if defined(_WIN64) || defined(_WIN32)

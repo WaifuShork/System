@@ -158,13 +158,12 @@
     <ClInclude Include="CharUnicodeInfo.hpp" />
     <ClInclude Include="Console.hpp" />
     <ClInclude Include="ConsoleColor.hpp" />
-    <ClInclude Include="Exceptions.hpp" />
+    <ClInclude Include="Errors.hpp" />
     <ClInclude Include="File.hpp" />
     <ClInclude Include="Float.hpp" />
     <ClInclude Include="Integer.hpp" />
     <ClInclude Include="Convert.hpp" />
     <ClInclude Include="String.hpp" />
-    <ClInclude Include="UnicodeCategory.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vsharp.txt">

@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
 
-#include "Char.hpp"
-
+#if defined(_WIN64) || defined(_WIN32)
 namespace System
 {
 	class Errors
@@ -13,3 +11,4 @@ namespace System
 			static constexpr const char* IndexOutOfBounds = "error: index was greater than the total length of the (const string_view&)";
 	};
 }
+#endif

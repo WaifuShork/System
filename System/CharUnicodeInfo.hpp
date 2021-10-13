@@ -1,5 +1,4 @@
 #pragma once
-#include "Char.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -9,7 +8,7 @@ namespace System
     static constexpr wchar_t LowSurrogateStart = 0xdc00; 
     static constexpr wchar_t LowSurrogateEnd = 0xdfff; 
 
-    static constexpr Int32 UnicodeCategoryOffset = 0;
-    static constexpr Int32 BidiCategoryOffset = 1;
+    static constexpr int_fast32_t UnicodeCategoryOffset = 0;
+    static constexpr int_fast32_t BidiCategoryOffset = 1;
 }
 #endif

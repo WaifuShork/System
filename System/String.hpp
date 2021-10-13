@@ -1,8 +1,5 @@
 #pragma once
-#include <algorithm>
 #include <string_view>
-
-#include "Char.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System

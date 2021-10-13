@@ -41,16 +41,13 @@
     <ClInclude Include="File.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UnicodeCategory.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="String.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CharUnicodeInfo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exceptions.hpp">
+    <ClInclude Include="Errors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

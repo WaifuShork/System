@@ -3,10 +3,9 @@
 #include <stdexcept>
 #include <string>
 
-#include "Convert.hpp"
 #include "String.hpp"
 #include "CharUnicodeInfo.hpp"
-#include "Exceptions.hpp"
+#include "Errors.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
