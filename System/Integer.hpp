@@ -51,7 +51,7 @@ namespace System
 	class Integer
 	{
 		public:
-			[[nodiscard]] static std::optional<Int64> TryParseI64(const std::u16string& value)
+			[[nodiscard]] static std::optional<Int64> TryParseI64(const std::wstring_view& value)
 			{
 				if (value.length() == 0)
 				{
@@ -83,7 +83,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			[[nodiscard]] static std::optional<UInt64> TryParseUI64(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt64> TryParseUI64(const std::wstring_view& value)
 			{
 				if (value.length() == 0)
 				{
@@ -111,7 +111,7 @@ namespace System
 				return result;
 			}
 
-			[[nodiscard]] static std::optional<Int32> TryParseI32(const std::u16string& value)
+			[[nodiscard]]static std::optional<Int32> TryParseI32(const std::wstring_view& value)
 			{
 				if (value.length() == 0)
 				{
@@ -143,7 +143,7 @@ namespace System
 				return isNeg ? -result : result;
 			}
 
-			[[nodiscard]] static std::optional<UInt32> TryParseUI32(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt32> TryParseUI32(const std::wstring_view& value)
 			{
 				if (value.length() == 0)
 				{
@@ -171,22 +171,22 @@ namespace System
 				return result;
 			}
 
-			[[nodiscard]] static std::optional<Int16> TryParseI16(const std::u16string& value)
+			[[nodiscard]] static std::optional<Int16> TryParseI16(const std::wstring_view& value)
 			{
 				return TryParseI32(value);
 			}
 
-			[[nodiscard]] static std::optional<UInt16> TryParseUI16(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt16> TryParseUI16(const std::wstring_view& value)
 			{
 				return TryParseUI32(value);
 			}
 
-			[[nodiscard]] static std::optional<Int8> TryParseI8(const std::u16string& value)
+			[[nodiscard]] static std::optional<Int8> TryParseI8(const std::wstring_view& value)
 			{
 				return TryParseI32(value);
 			}
 
-			[[nodiscard]] static std::optional<UInt8> TryParseUI8(const std::u16string& value)
+			[[nodiscard]] static std::optional<UInt8> TryParseUI8(const std::wstring_view& value)
 			{
 				return TryParseUI32(value);
 			}

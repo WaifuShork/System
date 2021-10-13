@@ -26,7 +26,7 @@
     <ClInclude Include="Integer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Converter.hpp">
+    <ClInclude Include="Convert.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleColor.hpp">
@@ -42,9 +42,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UnicodeCategory.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Format.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

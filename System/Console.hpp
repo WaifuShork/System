@@ -2,11 +2,10 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
-#include <tuple>
 #include <conio.h>
+#include <sstream>
 
 #include "ConsoleColor.hpp"
-#include "Converter.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -14,9 +13,9 @@ namespace System
 	class Console
 	{
 		public:
-			static void SetTitle(const std::u16string& title)
+			static void SetTitle(const std::wstring_view& title)
 			{
-				SetConsoleTitleA(Converter::FromUTF16(title).c_str());
+				SetConsoleTitleW(title.data());
 			}
 
 			static ConsoleColor GetForegroundColor()
@@ -36,11 +35,6 @@ namespace System
 			{
 				static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 				SetConsoleTextAttribute(handle, static_cast<int>(ConsoleColor::White));
-			}
-
-			static std::tuple<int, int> GetCursorPosition()
-			{
-				return std::make_tuple(0, 0);
 			}
 
 			static void Clear()
@@ -73,30 +67,42 @@ namespace System
 				SetConsoleCursorPosition(hStdOut, homeCoords);
 			}
 
-			static std::u16string ReadLine()
+			static std::wstring ReadLine()
 			{
 				std::wstring buffer{};
 				std::getline(std::wcin, buffer);
-				return std::u16string(buffer.begin(), buffer.end());
+				return buffer;
 			}
 
-			static std::u16string ReadWord()
+			static std::wstring ReadWord()
 			{
 				std::wstring buffer{};
 				std::wcin >> buffer;
-				return std::u16string(buffer.begin(), buffer.end());
-				// return Converter::U16Converter.from_bytes(buffer);
-			}
-			
-			static void WriteLine(const std::u16string& input = u"")
-			{
-				std::cout << Converter::FromUTF16(input) << '\n';
+				return buffer;
 			}
 
-			template<typename T>
-			static void WriteLine(const T& input = "")
+			static void Write(const std::wstring_view& input = L"")
 			{
-				std::cout << input << '\n';
+				std::wcout << input;
+			}
+
+			static void WriteLine(const std::wstring_view& input = L"")
+			{
+				std::wcout << input << '\n';
+			}
+
+			static void WriteError(const std::wstring_view& input)
+			{
+				SetForegroundColor(ConsoleColor::DarkRed);
+				Write(input);
+				ResetColor();
+			}
+
+			static void WriteErrorLine(const std::wstring_view& input)
+			{
+				SetForegroundColor(ConsoleColor::DarkRed);
+				WriteLine(input);
+				ResetColor();
 			}
 	};
 }
