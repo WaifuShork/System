@@ -3,7 +3,6 @@
 #include <optional>
 #include <string>
 #include "fast_float.h"
-#include "Char.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -61,9 +60,9 @@ namespace System
 				bool isNeg = false;
 				Int64 result = 0;
 
-				for (UInt32 i = 0; i < value.length(); i++)
+				for (size_t i = 0; i < value.length(); i++)
 				{
-					const Char16 ch = value[i];
+					const wchar_t ch = value[i];
 					if (i == 0 && ch == '-')
 					{
 						isNeg = true;
@@ -91,9 +90,9 @@ namespace System
 				}
 
 				UInt64 result = 0;
-				for (UInt32 i = 0; i < value.length(); i++)
+				for (size_t i = 0; i < value.length(); i++)
 				{
-					const Char16 c = value[i];
+					const wchar_t c = value[i];
 					if ((i == 0) && (c == '-'))
 					{
 						return {};
@@ -121,9 +120,9 @@ namespace System
 				bool isNeg = false;
 				Int32 result = 0;
 
-				for (UInt32 i = 0; i < value.length(); i++)
+				for (size_t i = 0; i < value.length(); i++)
 				{
-					const Char16 ch = value[i];
+					const wchar_t ch = value[i];
 					if (i == 0 && ch == '-')
 					{
 						isNeg = true;
@@ -151,9 +150,9 @@ namespace System
 				}
 
 				UInt32 result = 0;
-				for (UInt32 i = 0; i < value.length(); i++)
+				for (size_t i = 0; i < value.length(); i++)
 				{
-					const Char16 ch = value[i];
+					const wchar_t ch = value[i];
 					if (i == 0 && ch == '-')
 					{
 						return {};

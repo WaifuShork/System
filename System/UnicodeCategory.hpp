@@ -1,5 +1,6 @@
 #pragma once
 
+#if defined(_WIN64) || defined(_WIN32)
 namespace System::Globalization
 {
 	enum class UnicodeCategory
@@ -36,3 +37,4 @@ namespace System::Globalization
         OtherNotAssigned = 29,
 	};
 }
+#endif
