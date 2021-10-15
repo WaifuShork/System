@@ -22,7 +22,7 @@ namespace System
 	class Float
 	{
 		public:
-			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::wstring_view& text)
+			[[nodiscard]] static std::optional<Float64> TryParseF64(const std::wstring_view text)
 			{
 				Float64 result;
 				
@@ -42,7 +42,7 @@ namespace System
 				return result;
 			}
 
-			[[nodiscard]] static std::optional<Float32> TryParseF32(const std::wstring_view& text)
+			[[nodiscard]] static std::optional<Float32> TryParseF32(const std::wstring_view text)
 			{
 				Float32 result;
 

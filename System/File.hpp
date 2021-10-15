@@ -14,12 +14,12 @@ namespace System
 	class File
 	{
 		public:
-			[[nodiscard]] static bool Exists(const std::wstring_view& path)
+			[[nodiscard]] static bool Exists(const std::wstring_view path)
 			{
 				return std::filesystem::exists(path);
 			}
 
-			[[nodiscard]] static std::optional<std::wstring> ReadAllText(const std::wstring_view& path)
+			[[nodiscard]] static std::optional<std::wstring> ReadAllText(const std::wstring_view path)
 			{
 				if (!Exists(path))
 				{
@@ -30,7 +30,7 @@ namespace System
 				return std::wstring(std::istreambuf_iterator<Char8>(buffer), std::istreambuf_iterator<Char8>());
 			}
 
-			[[nodiscard]] static UInt64 CountLines(const std::wstring_view& path)
+			[[nodiscard]] static UInt64 CountLines(const std::wstring_view path)
 			{
 				if (!Exists(path))
 				{

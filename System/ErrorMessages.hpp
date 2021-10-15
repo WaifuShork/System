@@ -1,9 +1,10 @@
 #pragma once
+#include <string>
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
 {
-	class Errors
+	class ErrorMessages
 	{
 		public:
 			static constexpr const char* InvalidNullPtrStringView = "error: invalid (const string_view&) [reason: nullptr]";

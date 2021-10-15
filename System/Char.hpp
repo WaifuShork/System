@@ -5,7 +5,7 @@
 
 #include "String.hpp"
 #include "CharUnicodeInfo.hpp"
-#include "Errors.hpp"
+#include "ErrorMessages.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -64,22 +64,22 @@ namespace System
 				return std::wstring(1, value);
 			}
 
-			[[nodiscard]] static WChar Parse(const std::wstring_view& text)
+			[[nodiscard]] static WChar Parse(const std::wstring_view text)
 			{
 				if (text.data() == nullptr)
 				{
-					throw std::runtime_error(Errors::InvalidNullPtrStringView);
+					throw std::runtime_error(ErrorMessages::InvalidNullPtrStringView);
 				}
 
 				if (text.length() != 1)
 				{
-					throw std::runtime_error(Errors::CannotParseStringView);
+					throw std::runtime_error(ErrorMessages::CannotParseStringView);
 				}
 				
 				return text[0];
 			}
 
-			[[nodiscard]] static std::optional<WChar> TryParse(const std::wstring_view& text)
+			[[nodiscard]] static std::optional<WChar> TryParse(const std::wstring_view text)
 			{
 				if (text.data() == nullptr)
 				{
@@ -172,7 +172,7 @@ namespace System
 				return (chr >= HighSurrogateStart) && (chr <= HighSurrogateEnd);
 			}
 
-			[[nodiscard]] static bool IsHighSurrogate(const std::wstring_view& text, const size_t index)
+			[[nodiscard]] static bool IsHighSurrogate(const std::wstring_view text, const size_t index)
 			{
 				if (String::IsNullOrEmpty(text))
 				{
@@ -191,7 +191,7 @@ namespace System
 				return ((chr >= LowSurrogateStart) && (chr <= LowSurrogateEnd));
 			}
 
-			[[nodiscard]] static bool IsLowSurrogate(const std::wstring_view& text, const size_t index)
+			[[nodiscard]] static bool IsLowSurrogate(const std::wstring_view text, const size_t index)
 			{
 				if (String::IsNullOrEmpty(text))
 				{

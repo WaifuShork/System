@@ -13,7 +13,7 @@ namespace System
 	class Console
 	{
 		public:
-			static void SetTitle(const std::wstring_view& title)
+			static void SetTitle(const std::wstring_view title)
 			{
 				SetConsoleTitleW(title.data());
 			}
@@ -81,24 +81,24 @@ namespace System
 				return buffer;
 			}
 
-			static void Write(const std::wstring_view& input = L"")
+			static void Write(const std::wstring_view input = L"")
 			{
 				std::wcout << input;
 			}
 
-			static void WriteLine(const std::wstring_view& input = L"")
+			static void WriteLine(const std::wstring_view input = L"")
 			{
 				std::wcout << input << '\n';
 			}
 
-			static void WriteError(const std::wstring_view& input)
+			static void WriteError(const std::wstring_view input)
 			{
 				SetForegroundColor(ConsoleColor::DarkRed);
 				Write(input);
 				ResetColor();
 			}
 
-			static void WriteErrorLine(const std::wstring_view& input)
+			static void WriteErrorLine(const std::wstring_view input)
 			{
 				SetForegroundColor(ConsoleColor::DarkRed);
 				WriteLine(input);

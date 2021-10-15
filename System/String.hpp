@@ -7,12 +7,12 @@ namespace System
 	class String
 	{
 		public:
-			[[nodiscard]] static bool IsNullOrEmpty(const std::wstring_view& text)
+			[[nodiscard]] static bool IsNullOrEmpty(const std::wstring_view text)
 			{
 				return (text.data() == nullptr || text.length() == 0);
 			}
 
-			[[nodiscard]] static bool IsNullOrWhiteSpace(const std::wstring_view& text)
+			[[nodiscard]] static bool IsNullOrWhiteSpace(const std::wstring_view text)
 			{
 				if (text.data() == nullptr)
 				{
@@ -30,7 +30,7 @@ namespace System
 				return true;
 			}
 
-			[[nodiscard]] static bool IsWhiteSpace(const std::wstring_view& text, const size_t index)
+			[[nodiscard]] static bool IsWhiteSpace(const std::wstring_view text, const size_t index)
 			{
 				if (IsNullOrEmpty(text))
 				{
@@ -64,7 +64,7 @@ namespace System
 					|| chr == L'\u3000'; // ideographic space
 			}
 
-			[[nodiscard]] static bool IsNewLine(const std::wstring_view& text, const size_t index)
+			[[nodiscard]] static bool IsNewLine(const std::wstring_view text, const size_t index)
 			{
 				if (IsNullOrEmpty(text))
 				{
