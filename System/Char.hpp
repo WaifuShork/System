@@ -5,7 +5,7 @@
 
 #include "String.hpp"
 #include "CharUnicodeInfo.hpp"
-#include "ErrorMessages.hpp"
+#include "Errors.hpp"
 
 #if defined(_WIN64) || defined(_WIN32)
 namespace System
@@ -64,22 +64,22 @@ namespace System
 				return std::wstring(1, value);
 			}
 
-			[[nodiscard]] static WChar Parse(const std::wstring_view text)
+			[[nodiscard]] static WChar Parse(const std::wstring_view& text)
 			{
 				if (text.data() == nullptr)
 				{
-					throw std::runtime_error(ErrorMessages::InvalidNullPtrStringView);
+					throw std::runtime_error(Errors::InvalidNullPtrStringView);
 				}
 
 				if (text.length() != 1)
 				{
-					throw std::runtime_error(ErrorMessages::CannotParseStringView);
+					throw std::runtime_error(Errors::CannotParseStringView);
 				}
 				
 				return text[0];
 			}
 
-			[[nodiscard]] static std::optional<WChar> TryParse(const std::wstring_view text)
+			[[nodiscard]] static std::optional<WChar> TryParse(const std::wstring_view& text)
 			{
 				if (text.data() == nullptr)
 				{
@@ -107,21 +107,22 @@ namespace System
 
 			[[nodiscard]] static bool IsAlpha(const WChar chr)
 			{
-				return (chr >= 'a' && chr <= 'z')
-					|| (chr >= 'A' && chr <= 'Z');
+				return (chr >= L'a' && chr <= L'z')
+					|| (chr >= L'A' && chr <= L'Z');
 			}
 
 			[[nodiscard]] static bool IsLexicalIdentifier(const WChar chr)
 			{
-				return IsAlpha(chr) || chr == '_';
+				return IsAlpha(chr) || chr == L'_';
 			}
 
 			[[nodiscard]] static bool IsDigit(const WChar chr)
 			{
 				if (IsLatin1(chr))
 				{
-					return chr >= '0' && chr <= '9';
+					return chr >= L'0' && chr <= L'9';
 				}
+
 				return true;
 			}
 
@@ -172,7 +173,7 @@ namespace System
 				return (chr >= HighSurrogateStart) && (chr <= HighSurrogateEnd);
 			}
 
-			[[nodiscard]] static bool IsHighSurrogate(const std::wstring_view text, const size_t index)
+			[[nodiscard]] static bool IsHighSurrogate(const std::wstring_view& text, const size_t index)
 			{
 				if (String::IsNullOrEmpty(text))
 				{
@@ -188,10 +189,10 @@ namespace System
 
 			[[nodiscard]] static bool IsLowSurrogate(const WChar chr)
 			{
-				return ((chr >= LowSurrogateStart) && (chr <= LowSurrogateEnd));
+				return (chr >= LowSurrogateStart) && (chr <= LowSurrogateEnd);
 			}
 
-			[[nodiscard]] static bool IsLowSurrogate(const std::wstring_view text, const size_t index)
+			[[nodiscard]] static bool IsLowSurrogate(const std::wstring_view& text, const size_t index)
 			{
 				if (String::IsNullOrEmpty(text))
 				{
